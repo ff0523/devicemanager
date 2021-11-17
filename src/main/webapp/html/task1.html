@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>长周期设备监测系统</title>
+	<!-- Tell the browser to be responsive to screen width -->
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+	<!-- Bootstrap 3.3.7 -->
+	<link rel="stylesheet" href="../../static/bower_components/bootstrap/dist/css/bootstrap.min.css">
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="../../static/bower_components/font-awesome/css/font-awesome.min.css">
+	<!-- Ionicons -->
+	<link rel="stylesheet" href="../../static/bower_components/Ionicons/css/ionicons.min.css">
+	<!-- DataTables -->
+	<link rel="stylesheet" href="../../static/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+	<!-- Theme style -->
+	<link rel="stylesheet" href="../../static/dist/css/AdminLTE.min.css">
+	<!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+	<link rel="stylesheet" href="../../static/dist/css/skins/_all-skins.min.css">
+
+	<!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+	<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+	<!--[if lt IE 9]>
+	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+	<![endif]-->
+
+	<!-- Google Font -->
+	<link rel="stylesheet"
+		  href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+	<header class="main-header">
+		<!-- Logo -->
+		<a href="../../index2.html" class="logo"> <!-- mini logo for sidebar mini 50x50 pixels -->
+			<span class="logo-mini"></span> <!-- logo for regular state and mobile devices -->
+		</a>
+
+		<!-- Header Navbar: style can be found in header.less -->
+		<nav class="navbar navbar-static-top">
+			<!-- Sidebar toggle button-->
+			<a href="#" class="sidebar-toggle" data-toggle="push-menu"
+			   role="button"> <span class="sr-only">Toggle navigation</span> <span
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
+			</a>
+		</nav>
+	</header>
+	<!-- Left side column. contains the logo and sidebar -->
+	<aside class="main-sidebar">
+		<!-- sidebar: style can be found in sidebar.less -->
+		<section class="sidebar">
+			<!-- sidebar menu: : style can be found in sidebar.less -->
+			<ul class="sidebar-menu" data-widget="tree">
+				<li><a href="/device/init"><i class="fa fa-circle-o"></i>设备信息管理</a></li>
+				<li><a href="/task/init"><i class="fa fa-circle-o"></i>任务信息管理</a></li>
+			</ul>
+		</section>
+		<!-- /.sidebar -->
+	</aside>
+
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Main content -->
+		<section class="content">
+			<form id="form1">
+				<div style="float: left; width: 65%; height: 100px; margin-left: 20px">
+					<div style="float: top;height: 40px; margin-left: 50px;margin-top: 10px">
+						<div style="width: 300px; float: left;">
+							<font style="font-weight: bold;" size="3" color="black">试验编号:</font>
+							<input style="width: 150px; height: 25px" type="text" name="searchExperimentCode" id="searchExperimentCode">
+						</div>
+						<div style="width: 300px; float: left;margin-left: 20px">
+							<font style="font-weight: bold;" size="3" color="black">设备编号:</font>
+							<input style="width: 150px; height: 25px" type="text" name="searchDeviceCode" id="searchDeviceCode">
+						</div>
+					</div>
+					<div style="float: top;height: 40px; margin-left: 50px; margin-top: 10px;">
+						<div style="width: 300px; float: left;">
+							<font style="font-weight: bold;" size="3" color="black">任务状态:</font>
+							<select style="width: 150px; height: 25px" name="searchTaskStatus" id="searchTaskStatus">
+								<option value="" selected></option>
+								<option value="0">未开始</option>
+								<option value="1">进行中</option>
+								<option value="2">已结束</option>
+							</select>
+						</div>
+						<div style="width: 300px; float: left;margin-left: 20px">
+							<font style="font-weight: bold;" size="3" color="black">试验人员:</font>
+							<input style="width: 150px; height: 25px" type="text" name="searchExecutor" id="searchExecutor">
+						</div>
+						<input type="button" name="sub" value="查询" font="3"
+							   style="margin-left: 80px;float: left; width: 100px; height: 25px"
+							   onclick="query();">
+					</div>
+				</div>
+				<div style="float: left; width: 30%; height: 100px; margin-left: 20px">
+
+					<div style="float: top;height: 40px; margin-left: 50px;margin-top: 10px">
+						<input type="button" name="add" value="批量删除" font="3"
+							   style="margin-right: 100px; width: 100px; height: 25px"
+							   onclick="deleteBatch();">
+						<input type="button" name="add" value="下载模板" font="3"
+							   style="margin-right: 100px; width: 100px; height: 25px"
+							   onclick="deleteBatch();">
+					</div>
+					<div style="float: top;height: 40px; margin-left: 50px; margin-top: 10px;">
+						<input type="button" name="add" value="插入" font="3"
+							   style="margin-right: 100px; width: 100px; height: 25px"
+							   onclick="deleteBatch();">
+						<input type="button" name="add" value="批量导入" font="3"
+							   style="margin-right: 100px; width: 100px; height: 25px"
+							   onclick="deleteBatch();">
+					</div>
+
+				</div>
+
+
+			</form>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="box">
+						<!-- /.box-header -->
+						<div id="dataTable" class="box-body">
+							<table id="example2" class="table table-bordered table-hover">
+								<thead>
+								<tr>
+									<th><input id='checkAll' name='checkAll' onclick='checkAll()' type='checkbox'/></th>
+									<th>序号</th>
+									<th>试验编号</th>
+									<th>设备编号</th>
+									<th>设备名称</th>
+									<th>任务状态</th>
+									<th>开始时间</th>
+									<th>当前时间</th>
+									<th>试验人员</th>
+									<th>下一试验编号</th>
+									<th width='20%'>操作</th>
+								</tr>
+								</thead>
+								<tbody id="body2">
+							</table>
+						</div>
+
+						<!-- /.box-body -->
+					</div>
+
+					<!-- /.box -->
+				</div>
+				<!-- /.col -->
+			</div>
+			<!-- /.row -->
+		</section>
+		<!-- /.content -->
+	</div>
+
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery 3 -->
+<script src="../../static/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="../../static/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- DataTables -->
+<script src="../../static/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="../../static/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+<!-- SlimScroll -->
+<script src="../../static/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="../../static/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="../../static/dist/js/adminlte.min.js"></script>
+<script src="../../static/jquery/jquery.paginate.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="../../static/dist/js/demo.js"></script>
+<script type="text/javascript" src="../js/task.js"></script>
+<!-- page script -->
+<script type="text/javascript">
+	$(document).ready(function() {
+		initTable();
+	})
+</script>
+
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
